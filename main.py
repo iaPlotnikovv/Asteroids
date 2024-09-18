@@ -18,13 +18,14 @@ def main():
          for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-         game_window(screen,player)
+         game_window(screen,player,dt)
          dt=fps.tick(60)/1000
-        
 
-def game_window(screen, player):
+
+def game_window(screen, player,dt):
         screen.fill("purple")
         player.draw(screen)
+        player.update(dt)
         pygame.display.flip()
 
 #This line ensures the main() function is only called when this file is run directly; it won't run if it's imported as a module.
