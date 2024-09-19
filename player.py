@@ -3,6 +3,7 @@ import time
 import sys
 from circleshape import *
 from constants import *
+from shot import *
 
 
 class Player(CircleShape):
@@ -32,6 +33,9 @@ class Player(CircleShape):
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
+        if keys[pygame.K_SPACE]:
+            self.shoot(dt)
+
         if keys[pygame.K_w]:
             self.move(dt)
         if keys[pygame.K_s]:
@@ -41,6 +45,17 @@ class Player(CircleShape):
             self.rotate(-dt)
         if keys[pygame.K_d]:
             self.rotate(dt)
+
+        #Adding boarders
+        self.position.x = max(min(self.position.x, SCREEN_WIDTH - self.radius), self.radius)
+        self.position.y = max(min(self.position.y, SCREEN_HEIGHT - self.radius), self.radius)
+
+
+    def shoot(self,dt):
+        shot = Shot(self.position)
+        shot_vector = pygame.Vector2(0, 1).rotate(self.rotation)*PLAYER_SHOT_SPEED
+        shot.velocity = shot_vector 
+        
 
     def game_over(self,screen):
         font = pygame.font.SysFont("Arial", 52)
