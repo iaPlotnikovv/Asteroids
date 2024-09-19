@@ -1,4 +1,6 @@
 import pygame
+import sys
+import time
 from constants import *
 from player import *
 from asteroid import *
@@ -36,12 +38,18 @@ def main():
 
          for obj in updatable:
              obj.update(dt)
-
+            
+         for asteroid in asteroids:
+           if asteroid.collider_check(player):
+               player.game_over(screen)
+               
+            
          pygame.display.flip()
         #limit 60 FPS
          dt=fps.tick(60)/1000
          
          
+
 
 
 #This line ensures the main() function is only called when this file is run directly; it won't run if it's imported as a module.

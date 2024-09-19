@@ -1,4 +1,6 @@
 import pygame
+import time
+import sys
 from circleshape import *
 from constants import *
 
@@ -39,3 +41,14 @@ class Player(CircleShape):
             self.rotate(-dt)
         if keys[pygame.K_d]:
             self.rotate(dt)
+
+    def game_over(self,screen):
+        font = pygame.font.SysFont("Arial", 52)
+        screen.fill((0,0,0))
+        text_surface = font.render("GAME OVER", True, (255, 0, 0), "BLACK")  # Red text
+        screen.blit(text_surface, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
+        pygame.display.flip()
+        time.sleep(3)
+
+        pygame.quit()
+        sys.exit("GAME OVER !")
