@@ -61,7 +61,7 @@ def main():
 
          player.cooldown_msg(screen)
 
-         print(player.cooldown_timer)   
+        #  print(player.cooldown_timer)   
          pygame.display.flip()
         #limit 60 FPS
          dt=fps.tick(60)/1000
