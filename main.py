@@ -11,6 +11,7 @@ from shot import *
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    background_image = pygame.image.load('back.jpg')
     fps= pygame.time.Clock()
 
     print("Starting asteroids!")
@@ -45,14 +46,21 @@ def main():
          for asteroid in asteroids:
            if asteroid.collider_check(player):
                player.game_over(screen)
+           for shot in shots:
+               if asteroid.collider_check(shot):
+                   asteroid.split()
+                   shot.kill()
+               
 
-         screen.fill("purple")
+
+        #  screen.fill("purple")
+           screen.blit(background_image,(0,0))
 
          for obj in drawable:
              obj.draw(screen)
 
          player.cooldown_msg(screen)
-         
+
          print(player.cooldown_timer)   
          pygame.display.flip()
         #limit 60 FPS
