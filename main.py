@@ -38,19 +38,22 @@ def main():
             if event.type == pygame.QUIT:
                 return
             
+         for obj in updatable:
+             obj.update(dt)  
+         
+         
+         for asteroid in asteroids:
+           if asteroid.collider_check(player):
+               player.game_over(screen)
+
          screen.fill("purple")
 
          for obj in drawable:
              obj.draw(screen)
 
-         for obj in updatable:
-             obj.update(dt)
-            
-         for asteroid in asteroids:
-           if asteroid.collider_check(player):
-               player.game_over(screen)
-               
-            
+         player.cooldown_msg(screen)
+         
+         print(player.cooldown_timer)   
          pygame.display.flip()
         #limit 60 FPS
          dt=fps.tick(60)/1000
